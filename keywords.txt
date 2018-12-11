@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For BraccioRobot
+####################################### 
+# Class
+#######################################
+
+BraccioRobot	KEYWORD3
+Position	KEYWORD3
+
+#######################################
+# Methods and Functions 
+#######################################	
+
+init	KEYWORD2
+moveToPosition	KEYWORD2
+powerOff	KEYWORD2
+powerOn	KEYWORD2
+setStartSpeed	KEYWORD2
+getStartSpeed	KEYWORD2
+
+#######################################
+# Constants
+#######################################
+ 
+MAXIMUM_SPEED	LITERAL1
+MINIMUM_SPEED	LITERAL1
+
