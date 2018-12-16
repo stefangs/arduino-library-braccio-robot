@@ -17,6 +17,25 @@ powerOff	KEYWORD2
 powerOn	KEYWORD2
 setStartSpeed	KEYWORD2
 getStartSpeed	KEYWORD2
+setBase	KEYWORD2
+setShoulder	KEYWORD2
+setElbow	KEYWORD2
+setWristRotation	KEYWORD2
+setWrist	KEYWORD2
+setGripper	KEYWORD2
+set	KEYWORD2
+getBase	KEYWORD2
+getShoulder	KEYWORD2
+getElbow	KEYWORD2
+getWristRotation	KEYWORD2
+getWrist	KEYWORD2
+getGripper	KEYWORD2
+Position	KEYWORD2
+maxPositionDiff	KEYWORD2
+setFromString	KEYWORD2
+
+
+
 
 #######################################
 # Constants
