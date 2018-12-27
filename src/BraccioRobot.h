@@ -16,9 +16,13 @@
 #define BRACCIO_ROBOT_H_
 
 #include <Servo.h>
+#ifndef Servo_h
+#error Sketch must include Servo.h
+#endif
+
 #include "Position.h"
 
-#define MAXIMUM_SPEED 140
+#define MAXIMUM_SPEED 200
 #define MINIMUM_SPEED 20
 
 class _BraccioRobot {

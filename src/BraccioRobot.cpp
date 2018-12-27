@@ -16,15 +16,19 @@
 #include <Arduino.h>
 
 #define SOFT_START_CONTROL_PIN 12
-#define BIG_JOINT_MAXIMUM_SPEED 80
+#define BIG_JOINT_MAXIMUM_SPEED 140
 #define DEFAULT_START_SPEED 40
 #define MS_PER_S 1000
 #define SOFT_START_TIME 1000
 
-Position _BraccioRobot::initialPosition;
+Position _BraccioRobot::initialPosition(90, 90, 90, 90, 90, 73);
 _BraccioRobot BraccioRobot;
 
 void _BraccioRobot::init(Position& startPosition, bool doSoftStart) {
+  if (doSoftStart) {
+    pinMode(SOFT_START_CONTROL_PIN,OUTPUT);
+    digitalWrite(SOFT_START_CONTROL_PIN,LOW);
+  }
   startSpeed = DEFAULT_START_SPEED;
   base.attach(11);
   shoulder.attach(10);
@@ -46,7 +50,6 @@ void _BraccioRobot::init(Position& startPosition, bool doSoftStart) {
 }
 
 void _BraccioRobot::softStart() {
-  pinMode(SOFT_START_CONTROL_PIN,OUTPUT);
   long int startTime=millis();
   while(millis()-startTime < SOFT_START_TIME) {
     digitalWrite(SOFT_START_CONTROL_PIN,LOW);

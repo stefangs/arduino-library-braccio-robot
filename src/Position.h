@@ -35,7 +35,7 @@ public:
   Position();
   Position(int basePos, int ShoulderPos, int elbowPos, int wristRotationPos, int wristPos, int gripperPos);
   int maxPositionDiff(const Position& p) const;
-  bool setFromString(char* string);
+  int setFromString(char* string);
 
   Position& operator=(const Position& p);
 

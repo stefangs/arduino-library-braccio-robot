@@ -43,6 +43,7 @@
   next position, like in the above example using readline().
 */
 
+#include <Servo.h>
 #include "BraccioRobot.h"
 #define INPUT_BUFFER_SIZE 50
 
@@ -71,6 +72,10 @@ void interpretCommand(char* inputBuffer, byte commandLength) {
     positionArm(&inputBuffer[0]);
   } else if (inputBuffer[0] == 'H') {
     homePositionArm();
+  } else if (inputBuffer[0] == '0') {
+    BraccioRobot.powerOff();
+  }  else if (inputBuffer[0] == '1') {
+    BraccioRobot.powerOn();
   } else {
     Serial.println("E0");
   }
@@ -79,8 +84,9 @@ void interpretCommand(char* inputBuffer, byte commandLength) {
 
 void
 positionArm(char *in) {
-  if (armPosition.setFromString(in)) {
-    BraccioRobot.moveToPosition(armPosition, 140);
+  int speed = armPosition.setFromString(in);
+  if (speed > 0) {
+    BraccioRobot.moveToPosition(armPosition, speed);
     Serial.println("OK");
   } else {
     Serial.println("E1");
@@ -89,6 +95,6 @@ positionArm(char *in) {
 
 void
 homePositionArm() {
-  BraccioRobot.moveToPosition(armPosition.set(90, 90, 90, 90, 90, 73), 140);
+  BraccioRobot.moveToPosition(armPosition.set(90, 90, 90, 90, 90, 73), 100);
   Serial.println("OK");
 }

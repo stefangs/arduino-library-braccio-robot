@@ -107,16 +107,18 @@ Position::maxPositionDiff(const Position& p) const {
   return maxDiff;
 }
 
-bool 
+int
 Position::setFromString(char* string) {
   bool isSuccess = true;
+  int speed;
   setBase(parseInt(string, isSuccess));
   setShoulder(parseInt(string, isSuccess));
   setElbow(parseInt(string, isSuccess));
   setWristRotation(parseInt(string, isSuccess));
   setWrist(parseInt(string, isSuccess));
   setGripper(parseInt(string, isSuccess));
-  return isSuccess;
+  speed = parseInt(string, isSuccess);
+  return isSuccess ? speed : -1;
 }
 
 int
