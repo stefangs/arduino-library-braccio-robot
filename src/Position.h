@@ -33,7 +33,7 @@ public:
   inline int getGripper() const {return gripper;}
 
   Position();
-  Position(int basePos, int ShoulderPos, int elbowPos, int wristRotationPos, int wristPos, int gripperPos);
+  Position(int basePos, int ShoulderPos, int elbowPos, int wristPos, int wristRotationPos, int gripperPos);
   int maxPositionDiff(const Position& p) const;
   int setFromString(char* string);
 
@@ -45,8 +45,8 @@ private:
   int base;
   int shoulder;
   int elbow;
-  int wristRotation;
   int wrist;
+  int wristRotation;
   int gripper;
 };
 

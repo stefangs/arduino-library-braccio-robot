@@ -34,7 +34,7 @@ public:
   /* Moves the arm to the specified position with the specified speed. The movement will start at startSpeed and accelerate
      towards specified speed. At the end of the movement it will decelerate back to startSpeed before reaching
      end position. Speeds are adjusted so that all joints will start and finish at the same time regardless
-     of varying travel distance. Speed is in degrees/second and can be between 20 and 140 */
+     of varying travel distance. Speed is in degrees/second and can be between 20 and 200 */
   void moveToPosition(const Position& newPosition, int speed);
 
   /* Turns off power to the servo motors. This only work if you are using a robot shield later than V1.6.
@@ -44,7 +44,7 @@ public:
   /* Turns on power to the servo motors. This only work if you are using a robot shield later than V1.6 */
   void powerOn();
 
-  /* Set start speed of movement in degrees/second. Between 20 and 140 */
+  /* Set start speed of movement in degrees/second. Between 20 and 200 */
   void setStartSpeed(int speed);
   inline int getStartSpeed() const {return startSpeed;}
 

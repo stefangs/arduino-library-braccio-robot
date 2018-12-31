@@ -74,8 +74,10 @@ void interpretCommand(char* inputBuffer, byte commandLength) {
     homePositionArm();
   } else if (inputBuffer[0] == '0') {
     BraccioRobot.powerOff();
+    Serial.println("OK");
   }  else if (inputBuffer[0] == '1') {
     BraccioRobot.powerOn();
+    Serial.println("OK");
   } else {
     Serial.println("E0");
   }

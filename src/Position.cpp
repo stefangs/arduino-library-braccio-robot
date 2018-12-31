@@ -100,8 +100,8 @@ Position::maxPositionDiff(const Position& p) const {
   maxDiff = max(maxDiff, abs(base - p.base));
   maxDiff = max(maxDiff, abs(shoulder - p.shoulder));
   maxDiff = max(maxDiff, abs(elbow - p.elbow));
-  maxDiff = max(maxDiff, abs(wristRotation - p.wristRotation));
   maxDiff = max(maxDiff, abs(wrist - p.wrist));
+  maxDiff = max(maxDiff, abs(wristRotation - p.wristRotation));
   maxDiff = max(maxDiff, abs(gripper - p.gripper));
 
   return maxDiff;
@@ -114,8 +114,8 @@ Position::setFromString(char* string) {
   setBase(parseInt(string, isSuccess));
   setShoulder(parseInt(string, isSuccess));
   setElbow(parseInt(string, isSuccess));
-  setWristRotation(parseInt(string, isSuccess));
   setWrist(parseInt(string, isSuccess));
+  setWristRotation(parseInt(string, isSuccess));
   setGripper(parseInt(string, isSuccess));
   speed = parseInt(string, isSuccess);
   return isSuccess ? speed : -1;
