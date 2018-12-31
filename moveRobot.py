@@ -15,13 +15,13 @@ class Position:
         self.angels[5] = gripper
 
     def set(self, joint_number, value):
-        self.angels[joint_number] = value
+        self.angels[joint_number] = min(max(value, 0), 180)
 
     def get(self, joint_number):
         return self.angels[joint_number]
 
     def add(self, joint_number, value):
-        self.angels[joint_number] += value
+        self.set(joint_number, self.angels[joint_number] + value)
 
     def to_string(self):
         result = ""
