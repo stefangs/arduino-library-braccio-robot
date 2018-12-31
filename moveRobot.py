@@ -39,7 +39,7 @@ class Braccio:
 
     def write(self, string):
         self.port.write(string.encode())
-        print(self.port.readline())
+        self.port.readline()
 
     def move_to_position(self, position, speed):
         self.write('P' + position.to_string() + ',' + str(speed) + '\n')
@@ -64,32 +64,37 @@ position_names = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7
 
 def move_joint(joint, angle):
     positions[current_position].add(joint, angle)
+    print(positions[current_position].to_string())
     robot.move_to_position(positions[current_position], move_speed)
 
 
 def change_position(position):
-    global current_position, positions
-    print('Current positon:', current_position)
+    global current_position, positions, last_position
     if positions[position] is None:
         positions[position] = copy.deepcopy(positions[current_position])
+    last_position = current_position
     current_position = position
     robot.move_to_position(positions[current_position], move_speed)
-    print('Current positon after:', current_position)
+    print('Current position:', current_position)
 
 
 def key_pressed(event):
-    print(event.char)
+    global positions
     if event.char in moves:
         move = moves[event.char]
         move_joint(move[0], move[1])
     elif event.char in position_names:
         change_position(position_names[event.char])
+    elif event.char == "c":
+        positions[current_position] = copy.deepcopy(positions[last_position])
+        change_position(current_position)
 
 
 home = Position(90, 90, 90, 90, 90, 72)
 positions = [copy.deepcopy(home), None, None, None, None, None, None, None, None, None]
 current_position = 0
-move_speed = 140
+last_position = 0
+move_speed = 100
 robot = Braccio('COM4')
 robot.move_to_position(home, 100)
 
