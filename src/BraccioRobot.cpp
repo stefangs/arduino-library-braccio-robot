@@ -33,8 +33,8 @@ void _BraccioRobot::init(Position& startPosition, bool doSoftStart) {
   base.attach(11);
   shoulder.attach(10);
   elbow.attach(9);
-  wristRotation.attach(6);
-  wrist.attach(5);
+  wristRotation.attach(5);
+  wrist.attach(6);
   gripper.attach(3);
         
   base.write(startPosition.getBase());

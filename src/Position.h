@@ -23,7 +23,7 @@ public:
   Position& setWristRotation(int w);
   Position& setWrist(int v);
   Position& setGripper(int g);
-  Position& set(int basePos, int shoulderPos, int elbowPos, int wristRotationPos, int wristPos, int gripperPos);
+  Position& set(int basePos, int shoulderPos, int elbowPos, int wristPos, int wristRotationPos, int gripperPos);
 
   inline int getBase() const {return base;}
   inline int getShoulder() const {return shoulder;}

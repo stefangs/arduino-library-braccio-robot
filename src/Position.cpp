@@ -73,12 +73,12 @@ Position::Position(int basePos, int shoulderPos, int elbowPos, int wristRotation
 }
 
 Position&
-Position::set(int basePos, int shoulderPos, int elbowPos, int wristRotationPos, int wristPos, int gripperPos) {
+Position::set(int basePos, int shoulderPos, int elbowPos, int wristPos, int wristRotationPos, int gripperPos) {
   setBase(basePos);
   setShoulder(shoulderPos);
   setElbow(elbowPos);
-  setWristRotation(wristRotationPos);
   setWrist(wristPos);
+  setWristRotation(wristRotationPos);
   setGripper(gripperPos);
   return *this;
 }
