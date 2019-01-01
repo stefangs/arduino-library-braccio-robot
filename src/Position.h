@@ -15,6 +15,9 @@
 #ifndef POSITION_H_
 #define POSITION_H_
 
+#define GRIPPER_OPEN 10
+#define GRIPPER_CLOSED 73
+
 class Position {
 public:
   Position& setBase(int b);
