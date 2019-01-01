@@ -62,10 +62,11 @@ moves = {'q': (0, 1), 'a': (0, -1),
 position_names = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
 
 
-def move_joint(joint, angle):
-    positions[current_position].add(joint, angle)
-    print(positions[current_position].to_string())
+def move_joint(joint_number, angle):
+    positions[current_position].add(joint_number, angle)
     robot.move_to_position(positions[current_position], move_speed)
+    joint_labels[joint_number].config(text=str(positions[current_position].get(joint_number)))
+    joint_labels[joint_number].update_idletasks()
 
 
 def change_position(position):
@@ -75,7 +76,11 @@ def change_position(position):
     last_position = current_position
     current_position = position
     robot.move_to_position(positions[current_position], move_speed)
-    print('Current position:', current_position)
+    position_label.config(text=str(position))
+    position_label.update_idletasks()
+    for j in range(0, len(joints)):
+        joint_labels[j].config(text=str(positions[current_position].get(j)))
+        joint_labels[j].update_idletasks()
 
 
 def key_pressed(event):
@@ -89,19 +94,38 @@ def key_pressed(event):
         positions[current_position] = copy.deepcopy(positions[last_position])
         change_position(current_position)
 
+def setup_gui():
+    global position_label
+    root = Tk()
+    root.title('Braccio Robot')
+    root.bind('<Key>', key_pressed)
+    Label(text='Move robot joints with keyboard keys\nChange positions with numerical keys') \
+        .grid(row=0, column=0, columnspan=2, padx=(30, 30))
+    Label(text='Current position:').grid(row=1, column=0)
+    position_label = Label(text=str(current_position))
+    position_label.grid(row=1, column=1)
 
+    i = 0
+    for joint in joints:
+        Label(text=joint).grid(row=2 + i, column=0)
+        label = Label(text=str(positions[current_position].get(i)))
+        label.grid(row=2 + i, column=1)
+        joint_labels.append(label)
+        i += 1
+    root.mainloop()
+
+
+joints = ['Base [q,a]', 'Shoulder [w,s]', 'Elbow [e,d]', 'Wrist [r,f]', 'Wrist rotation [t,g]', 'Gripper [y,h]']
 home = Position(90, 90, 90, 90, 90, 72)
 positions = [copy.deepcopy(home), None, None, None, None, None, None, None, None, None]
 current_position = 0
 last_position = 0
 move_speed = 100
+joint_labels = []
+position_label = None
+
 robot = Braccio('COM4')
 robot.move_to_position(home, 100)
-
-root = Tk()
-root.bind('<Key>', key_pressed)
-
-root.mainloop()
-
+setup_gui()
 robot.move_to_position(home, 100)
 robot.power_off()
