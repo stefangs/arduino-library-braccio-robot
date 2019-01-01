@@ -94,6 +94,7 @@ def key_pressed(event):
         positions[current_position] = copy.deepcopy(positions[last_position])
         change_position(current_position)
 
+
 def setup_gui():
     global position_label
     root = Tk()
@@ -124,7 +125,8 @@ move_speed = 100
 joint_labels = []
 position_label = None
 
-robot = Braccio('COM4')
+port = input("Enter serial port: ")
+robot = Braccio(port)
 robot.move_to_position(home, 100)
 setup_gui()
 robot.move_to_position(home, 100)
