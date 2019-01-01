@@ -16,14 +16,16 @@
   This example reads robot positions from the serial port and puts
   the Braccio in those positions. A position is formatted as:
 
-  P90,90,90,90,90,73<NL>
+  P90,90,90,90,90,73,100<NL>
 
-  Where the numbers are the joint angels in the same order as in the Position class.
+  Where the numbers are the joint angels in the same order as in the Position class and the last
+  number is the speed of the movement in degrees per second.
   When the arm has reached the specified position it will answer with the string:
 
   OK<NL>
 
-  You can also issue the Home command, to put the robot in the home position:
+  You can also issue the Home command (H), to put the robot in the home position, the Off command (0)
+  to turn off the robot or the On command (1) to turn on the robot:
 
   H<NL>
 
@@ -34,9 +36,9 @@
 
   s = serial.Serial('COM4', 115200, timeout=5)
   time.sleep(3)
-  s.write(b'P0,90,20,90,90,73\n')
+  s.write(b'P0,90,20,90,90,73,100\n')
   print(s.readline())
-  s.write(b'P90,90,20,90,90,73\n')
+  s.write(b'P90,90,20,90,90,73,100\n')
   print(s.readline())
 
   You should also wait until you get an "OK" (or "E0") from the Arduino before sending the
