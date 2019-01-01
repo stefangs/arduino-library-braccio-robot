@@ -45,7 +45,8 @@ void loop() {
   //Wait 1 second
   delay(1000);
 
-  // Move the robot to a new position. Note that you can set the position at the same time as you use it
+  // Move the robot to a new position with speed 50 degrees per second. 
+  // Note that you can set the position at the same time as you use it
   BraccioRobot.moveToPosition(pos.set(180,  165, 0, 0, 180,  10), 50);  
 
   //Wait 1 second
