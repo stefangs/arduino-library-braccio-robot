@@ -4,7 +4,8 @@
 
  This sketch shows how to move the Braccio to different positions
  with different options. The example picks up an object at a pickup
- position and puts it down at the put down position.
+ position and puts it down at the put down position and then moves it
+ back again.
 
  Created 01012019
  by Stefan Strömberg
@@ -14,6 +15,7 @@
 
 #include <BraccioRobot.h>
 #include <Servo.h>
+#define GRIPPER_HALF_CLOSED 64
 
 // Create a custom initial position
 // M1=base degrees. Allowed values from 0 to 180 degrees
@@ -33,33 +35,44 @@ void setup() {
   //init() will start the robot and move to the supplied initial position.
   // If no initial position is supplied, it will go to the default initial position
   BraccioRobot.init(myInitialPosition);
+  
   // The put down position is just 60 degrees rotated from the pick up position
   putDownPosition = pickUpPosition;
   putDownPosition.setBase(60);
 }
 
-
-void loop() {
+// Moves an object between two specified positions
+void moveBetweenPositions(Position& fromPosition, Position& toPosition) {
+  
   // Move to the ready position with open gripper
   BraccioRobot.moveToPosition(readyPosition.setGripper(GRIPPER_OPEN), 100);
 
-  // Move to the pick up position with open gripper
-  BraccioRobot.moveToPosition(pickUpPosition.setGripper(GRIPPER_OPEN), 100);  
+  // Move to the fromPosition with open gripper
+  BraccioRobot.moveToPosition(fromPosition.setGripper(GRIPPER_OPEN), 100);  
   
-  // Close the gripper slowly at pick up position
-  BraccioRobot.moveToPosition(pickUpPosition.setGripper(GRIPPER_CLOSED), 20);  
+  // Close the gripper slowly at fromPosition
+  BraccioRobot.moveToPosition(fromPosition.setGripper(GRIPPER_HALF_CLOSED), 20);  
   
   // Move at moderate speed to the ready position with closed gripper
-  BraccioRobot.moveToPosition(readyPosition.setGripper(GRIPPER_CLOSED), 50);
+  BraccioRobot.moveToPosition(readyPosition.setGripper(GRIPPER_HALF_CLOSED), 50);
 
-  // Move at moderate speed to the put down position with closed gripper
-  BraccioRobot.moveToPosition(putDownPosition.setGripper(GRIPPER_CLOSED), 50);
+  // Move at moderate speed to the toPosition with closed gripper
+  BraccioRobot.moveToPosition(toPosition.setGripper(GRIPPER_HALF_CLOSED), 50);
 
-  // Open the gripper slowly at the put down position
-  BraccioRobot.moveToPosition(putDownPosition.setGripper(GRIPPER_OPEN), 20);
+  // Open the gripper slowly at the toPosition 
+  BraccioRobot.moveToPosition(toPosition.setGripper(GRIPPER_OPEN), 20);
 
   // Move to the ready position with open gripper
-  BraccioRobot.moveToPosition(readyPosition.setGripper(GRIPPER_OPEN), 100);
+  BraccioRobot.moveToPosition(readyPosition.setGripper(GRIPPER_OPEN), 100);   
+}
+
+void loop() {
+
+  // Move from pickUpPosition to putDownPosition
+  moveBetweenPositions(pickUpPosition, putDownPosition);
+
+  // Move back from putDownPosition to pickUpPosition
+  moveBetweenPositions(putDownPosition, pickUpPosition);
 
   //Wait 5 seconds
   delay(5000);
