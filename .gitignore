@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 *.idea
+venv
 
 # Compiled Object files
 *.slo
