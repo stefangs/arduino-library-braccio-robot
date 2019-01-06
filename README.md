@@ -10,7 +10,7 @@ This is a library to control the Tinkerkit Braccio robot arm. The library suppor
 * Configurable start and max speed for movements
 * Automatically limits speed for the large joints
 * Speed specified in degrees per second
-* Includes a simple Python program for interactive robot movements
+* Includes a simple Python program (moveRobot.py) for interactive robot movements
 
 When the robot is moved from one position to another, it starts at a 
 specified start speed and accelerates to the specified travel speed. 
